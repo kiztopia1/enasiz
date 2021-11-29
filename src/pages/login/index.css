@@ -1,0 +1,31 @@
+.main{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    position: relative;
+}
+.cont{
+    position: relative;
+    top:-40px;
+    background-color: whitesmoke;
+    padding:20px;
+    border-radius: 3px;
+}
+.cont h2{
+    margin-bottom: 20px;
+}
+.input-cont{
+    display: flex;
+    margin-bottom: 6px;
+}
+.cont .input-cont label{
+    display: inline-block;
+    width: 150px;
+}
+.cont button{
+    border:1px solid black;
+    padding: 2px 5px;
+    border-radius: 3px;
+    margin-top: 10px;
+}

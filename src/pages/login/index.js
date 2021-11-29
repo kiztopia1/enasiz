@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom';
 import './index.css'
 class Login extends React.Component {
     constructor(props){
@@ -31,6 +32,9 @@ class Login extends React.Component {
                     <p className="error">{this.state.error}</p>
                     
                     <button type="submit">Sign up</button>
+                    <div className="bottom-nav">
+                        <Link to='/signup'>create new account</Link>
+                    </div>
                 </form>
                 </div>
                 

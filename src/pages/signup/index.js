@@ -1,5 +1,5 @@
 import React from 'react'
-
+import './index.css'
 class Signup extends React.Component {
     constructor(props){
         super(props);
@@ -22,22 +22,21 @@ class Signup extends React.Component {
     }
     render () {
         return ( 
-            <div>
-                <h1>enasiz</h1>
-    
+            <div className='main'>
+
                 <div className="cont">
                 {this.state.error}
                 <h2>Sign up</h2>
                 <form onSubmit={this.handelSubmit}>
-                    <div>
+                    <div className="input-cont">
                         <label htmlFor="username">user name</label>
                         <input type="text" name="username" id="username" />
                     </div>
-                    <div>
+                    <div className="input-cont">
                         <label htmlFor="password">Password</label>
                         <input type="password" name="password" id="password" />
                     </div>
-                    <div>
+                    <div className="input-cont">
                         <label htmlFor="password2">confirm password</label>
                         <input type='password' name='password2' id="password2"/>
                     </div>

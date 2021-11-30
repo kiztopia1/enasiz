@@ -13,7 +13,7 @@ class Nav extends React.Component {
         this.menuHandler = this.menuHandler.bind(this);
     }
     menuHandler(){
-        if(this.state.class == 'on'){
+        if(this.state.class === 'on'){
             this.setState({class: ''})
         }else {
             this.setState({class: 'on'})

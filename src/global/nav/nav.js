@@ -1,9 +1,10 @@
-import React,{ useState } from 'react'
+import React,{  } from 'react'
 import { Link } from 'react-router-dom'
 import './index.css'
 
 class Nav extends React.Component {
     constructor(){
+        super();
         this.state ={
             status:false
         };
@@ -14,7 +15,7 @@ class Nav extends React.Component {
 
                 <Link to='/' ><img src="imgs/logoDark.svg" alt="" className="logo" /></Link>
                 
-                <span className='white menu'>menu</span>
+                <span className='white menu' >menu</span>
                 <div className="slide">
                     <img src="imgs/cross.svg" alt="X" className='cross' />
                     <ul>

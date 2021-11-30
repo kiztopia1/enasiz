@@ -1,5 +1,5 @@
 import React,{useState} from 'react'
-import './CreateToken.css'
+import './CreateToken.scss'
 function CreateToken() {
     const [Amount, setAmount] = useState(0)
     const [AmountStatus, setAmountStatus] = useState(false)

@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom';
-import './index.css'
+import './index.scss'
 class Login extends React.Component {
     constructor(props){
         super(props);

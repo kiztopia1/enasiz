@@ -7,7 +7,7 @@ class Nav extends React.Component {
         super(props);
         this.state ={
             status:false,
-            class:'on'
+            class:''
         };
 
         this.menuHandler = this.menuHandler.bind(this);
@@ -26,7 +26,7 @@ class Nav extends React.Component {
                 <Link to='/' ><img src="imgs/logo.svg" alt="" className="logo" /></Link>
                 
                 <span className='white menu' onClick={this.menuHandler}>menu</span>
-                <div className={`slide ${this.state.class}`}>
+                <div className={`slide  ${this.state.class}`}>
                     <img src="imgs/cross.svg" alt="X" className='cross' onClick={this.menuHandler}/>
                     <ul>
                         <Link to='/login'>Login</Link>

@@ -8,7 +8,7 @@ class Nav extends React.Component {
         return (
             <nav>
 
-                <img src="imgs/logoDark.svg" alt="" className="logo" />
+                <Link to='/' ><img src="imgs/logoDark.svg" alt="" className="logo" /></Link>
                 
                 <span className='white menu'>menu</span>
                 <div className="slide">

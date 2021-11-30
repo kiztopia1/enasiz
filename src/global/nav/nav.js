@@ -1,9 +1,13 @@
-import React from 'react'
+import React,{ useState } from 'react'
 import { Link } from 'react-router-dom'
 import './index.css'
 
 class Nav extends React.Component {
-
+    constructor(){
+        this.state ={
+            status:false
+        };
+    }
     render() {
         return (
             <nav>

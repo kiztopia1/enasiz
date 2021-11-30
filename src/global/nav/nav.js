@@ -1,19 +1,20 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import './index.css'
+
 class Nav extends React.Component {
 
     render() {
         return (
             <nav>
-                <img src="imgs/logo.png" alt="" className="logo" />
+
+                <img src="imgs/logoDark.svg" alt="" className="logo" />
                 
-                <div className="side-cont">
-                    <span className='white'>kiztopia</span>
-                    <Link to='/login'>Login</Link>
-                </div>
+                <span className='white menu'>menu</span>
                 <div className="slide">
+                    <img src="imgs/cross.svg" alt="X" className='cross' />
                     <ul>
+                        <Link to='/login'>Login</Link>
                         <Link to='/'>My Account</Link>
                         <Link to='/'>Dashboard</Link>
                         <Link to='/'>generate token</Link>

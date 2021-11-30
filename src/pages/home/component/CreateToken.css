@@ -1,17 +1,28 @@
 .create-token{
-    background-color: white;
+    background-color: #E3E7EA;
     margin-top: 20px;
     display: flex;
     justify-content: space-around;
 }
 .create{
     padding: 20px;
+    text-align: center;
 }
 .create-btn{
     background-color:#426280 ;
     font-size: 1.2rem;
     padding: 5px 15px;
     border-radius: 4px;
+    color: whitesmoke;
+    cursor: pointer;
+}
+.create .form{
+    margin-top: 20px;
+}
+.create .form input{
+    margin-left: 6px;
+    border-radius: 2px;
+    border:1px solid #426280
 }
 .connect{
     padding: 20px;

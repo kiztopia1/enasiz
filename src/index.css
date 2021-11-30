@@ -15,6 +15,12 @@ body {
   text-decoration: none;
   color: rgb(42, 62, 80);
 }
+.show{
+  display: inherit;
+}
+.hide{
+  display: none;
+}
 .error{
   color: rgb(207, 48, 48);
   padding:5px;

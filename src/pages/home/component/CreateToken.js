@@ -2,8 +2,14 @@ import React from 'react'
 import './CreateToken.css'
 function CreateToken() {
     return (
-        <div>
-            <span className="create">Creat Token</span>
+        <div className='create-token'>
+            <div className="create">
+            <span className="create-btn">Creat Token</span>
+            </div>
+
+            <div className="connect">
+            <span className="connect-btn">Connect</span>
+            </div>
         </div>
     )
 }

@@ -6,9 +6,14 @@ nav{
     align-items: center;
     justify-content: space-between;
 }
-nav img{
-    height: 90%;
-    padding:6px
+nav a{
+    padding:30px
+    
+}
+nav a img{
+    height: 50px;
+    position: relative;
+    top:10px
 }
 .menu{
     background-color: #a6b0be;
@@ -25,15 +30,15 @@ nav .slide{
     right: -300px;
     width: 300px;
     opacity: 0;
-    transition: 0.5s;
+    transition: 0.3s;
     background-color: whitesmoke;
 
 }
 nav .slide .cross{
 
     position: relative;
-    left: 235px;
-    top:14px;
+    left: 230px;
+    top:20px;
     width: 35px;
     
 }

@@ -23,7 +23,7 @@ class Nav extends React.Component {
         return (
             <nav>
 
-                <Link to='/' ><img src="imgs/logoDark.svg" alt="" className="logo" /></Link>
+                <Link to='/' ><img src="imgs/logo.svg" alt="" className="logo" /></Link>
                 
                 <span className='white menu' onClick={this.menuHandler}>menu</span>
                 <div className={`slide ${this.state.class}`}>

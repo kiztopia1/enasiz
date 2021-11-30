@@ -1,6 +1,7 @@
-import React from 'react'
+import React, { Fragment } from 'react'
 import { Link } from 'react-router-dom';
 import './index.scss'
+import Nav from '../../global/nav/nav'
 class Signup extends React.Component {
     constructor(props){
         super(props);
@@ -23,7 +24,9 @@ class Signup extends React.Component {
     }
     render () {
         return ( 
-            <div className='main'>
+            <Fragment>
+                <Nav/>
+                <div className='main'>
                 
                 <div className="cont">
                 
@@ -52,6 +55,8 @@ class Signup extends React.Component {
                 </div>
                 
             </div>
+            </Fragment>
+            
         )
         }
 }

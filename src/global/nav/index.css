@@ -10,6 +10,14 @@ nav img{
     height: 90%;
     padding:6px
 }
+.menu{
+    background-color: #a6b0be;
+    padding:5px 10px;
+    border-radius: 3px;
+    opacity: 0.8;
+    cursor: pointer;
+    margin-right: 20px;
+}
 nav .slide{
     padding: 0 3px;
     position: absolute;
@@ -21,7 +29,7 @@ nav .slide{
     background-color: whitesmoke;
 
 }
-nav .cross{
+nav .slide .cross{
 
     position: relative;
     left: 235px;
@@ -29,7 +37,7 @@ nav .cross{
     width: 35px;
     
 }
-nav .cross:hover{
+nav .slide .cross:hover{
     background-color: rgb(219, 219, 219);
     border-radius: 50%;
 }
@@ -40,17 +48,10 @@ nav .slide ul{
     font-size: 1.4rem;
     height: 95vh;
 }
-.slide ul a{
+nav .slide ul a{
     margin-bottom: 20px;
 }
-.menu{
-    background-color: #a6b0be;
-    padding:5px 10px;
-    border-radius: 3px;
-    opacity: 0.8;
-    cursor: pointer;
-    margin-right: 20px;
-}
+
 /* the menu toggler*/
 .on{
     transform: translateX(-300px);

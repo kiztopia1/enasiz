@@ -3,11 +3,21 @@ import { Link } from 'react-router-dom'
 import './index.css'
 
 class Nav extends React.Component {
-    constructor(){
-        super();
+    constructor(props){
+        super(props);
         this.state ={
-            status:false
+            status:false,
+            class:'on'
         };
+
+        this.menuHandler = this.menuHandler.bind(this);
+    }
+    menuHandler(){
+        if(this.state.class == 'on'){
+            this.setState({class: ''})
+        }else {
+            this.setState({class: 'on'})
+        }
     }
     render() {
         return (
@@ -15,9 +25,9 @@ class Nav extends React.Component {
 
                 <Link to='/' ><img src="imgs/logoDark.svg" alt="" className="logo" /></Link>
                 
-                <span className='white menu' >menu</span>
-                <div className="slide">
-                    <img src="imgs/cross.svg" alt="X" className='cross' />
+                <span className='white menu' onClick={this.menuHandler}>menu</span>
+                <div className={`slide ${this.state.class}`}>
+                    <img src="imgs/cross.svg" alt="X" className='cross' onClick={this.menuHandler}/>
                     <ul>
                         <Link to='/login'>Login</Link>
                         <Link to='/'>My Account</Link>

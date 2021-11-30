@@ -14,8 +14,10 @@ nav .slide{
     padding: 0 3px;
     position: absolute;
     top: 0;
-    right: 0;
+    right: -300px;
     width: 300px;
+    opacity: 1;
+    transition: 0.5s;
     background-color: whitesmoke;
 
 }

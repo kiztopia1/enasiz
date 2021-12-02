@@ -1,13 +1,14 @@
 import React,{  } from 'react'
 import { Link } from 'react-router-dom'
 import './index.scss'
-
+import {selectUser} from '../../app/userSlice'
 class Nav extends React.Component {
     constructor(props){
         super(props);
         this.state ={
             status:false,
-            class:''
+            class:'',
+            user: selectUser
         };
 
         this.menuHandler = this.menuHandler.bind(this);
@@ -19,12 +20,12 @@ class Nav extends React.Component {
             this.setState({class: 'on'})
         }
     }
-    render() {
+        render() {
         return (
             <nav>
 
                 <Link to='/' ><img src="imgs/logo.svg" alt="" className="logo" /></Link>
-                
+                {this.user}
                 <span className='white menu' onClick={this.menuHandler}>menu</span>
                 <div className={`slide  ${this.state.class}`}>
                     <img src="imgs/cross.svg" alt="X" className='cross' onClick={this.menuHandler}/>

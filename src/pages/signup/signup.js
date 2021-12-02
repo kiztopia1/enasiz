@@ -1,7 +1,9 @@
 import React, { Fragment } from 'react'
 import { Link } from 'react-router-dom';
+import axios from 'axios'
 import './index.scss'
 import Nav from '../../global/nav/nav'
+
 class Signup extends React.Component {
     constructor(props){
         super(props);
@@ -16,6 +18,14 @@ class Signup extends React.Component {
         const password1 = data.get('password');
         const password2 = data.get('password2');
         if (password1 === password2){
+
+            let user = {
+                username: username,
+                password: password1
+            }
+            axios.post('http://localhost:4000/signup', user).then(res => {
+                console.log(res)
+            } )
             console.log('done!')
         }else{
             this.setState({error: 'password doesnot match'})

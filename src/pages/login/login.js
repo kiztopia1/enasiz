@@ -1,32 +1,30 @@
-import React, { Fragment } from 'react'
+import React, { Fragment, useRef } from 'react'
 import axios from 'axios'
+import {useDispatch} from 'react-redux'
 import { Link } from 'react-router-dom';
-import Nav from '../../global/nav/nav'
+import Nav from '../../global/nav/nav';
 import './index.scss'
-class Login extends React.Component {
-    constructor(props){
-        super(props);
-        this.state = {error: ''}
-        this.handelSubmit = this.handelSubmit.bind(this)
-    }
 
+const Login = () => {
+    const dispatch = useDispatch()  
+    const username = useRef(null)
+    const password = useRef(null)
     handelSubmit(event){
         event.preventDefault();
-        const data = new FormData(event.target)
-        const username = data.get('username').trim();
-        const password = data.get('password');
+        
+        const username = username.current.value.trim();
+        const password = password.current.value;
         let user = {
             username: username,
             password: password
         }
         axios.post('http://localhost:4000/users/login', user).then(res => {
-            console.log(res)
+            
         } )
         console.log('done!')
     }
-    render () {
-        return ( 
-            <Fragment>
+    return(
+        <Fragment>
                 <Nav/>
                 <div className='main'>
                 
@@ -36,11 +34,11 @@ class Login extends React.Component {
                 <form onSubmit={this.handelSubmit}>
                     <div className="input-cont">
                         <label htmlFor="username">user name</label>
-                        <input type="text" name="username" id="username" required='true' />
+                        <input type="text" name="username" id="username" required='true' ref={username}/>
                     </div>
                     <div className="input-cont">
                         <label htmlFor="password">Password</label>
-                        <input type="password" name="password" id="password" required='true'/>
+                        <input type="password" name="password" id="password" required='true' ref={password}/>
                     </div>
                     <p className="error">{this.state.error}</p>
                     
@@ -53,9 +51,7 @@ class Login extends React.Component {
                 
             </div>
             </Fragment>
-            
-        )
-        }
+    )
 }
 
 export default Login

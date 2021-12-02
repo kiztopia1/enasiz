@@ -1,4 +1,5 @@
 import React, { Fragment } from 'react'
+import axios from 'axios'
 import { Link } from 'react-router-dom';
 import Nav from '../../global/nav/nav'
 import './index.scss'
@@ -12,7 +13,16 @@ class Login extends React.Component {
     handelSubmit(event){
         event.preventDefault();
         const data = new FormData(event.target)
-        console.log(data.get('username'))
+        const username = data.get('username').trim();
+        const password = data.get('password');
+        let user = {
+            username: username,
+            password: password
+        }
+        axios.post('http://localhost:4000/users/login', user).then(res => {
+            console.log(res)
+        } )
+        console.log('done!')
     }
     render () {
         return ( 

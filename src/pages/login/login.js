@@ -3,13 +3,14 @@ import axios from 'axios'
 import {useDispatch} from 'react-redux'
 import { Link } from 'react-router-dom';
 import Nav from '../../global/nav/nav';
+import {login } from '../../app/userSlice' 
 import './index.scss'
 
 const Login = () => {
     const dispatch = useDispatch()  
     const username = useRef(null)
     const password = useRef(null)
-    handelSubmit(event){
+    const handelSubmit = (event) => {
         event.preventDefault();
         
         const username = username.current.value.trim();
@@ -19,7 +20,7 @@ const Login = () => {
             password: password
         }
         axios.post('http://localhost:4000/users/login', user).then(res => {
-            
+            dispatch(login(user))
         } )
         console.log('done!')
     }
@@ -31,7 +32,7 @@ const Login = () => {
                 <div className="cont">
                 
                 <h2>Login</h2>
-                <form onSubmit={this.handelSubmit}>
+                <form onSubmit={handelSubmit}>
                     <div className="input-cont">
                         <label htmlFor="username">user name</label>
                         <input type="text" name="username" id="username" required='true' ref={username}/>

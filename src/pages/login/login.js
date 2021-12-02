@@ -3,7 +3,8 @@ import axios from 'axios'
 import {useDispatch} from 'react-redux'
 import { Link } from 'react-router-dom';
 import Nav from '../../global/nav/nav';
-import {login } from '../../app/userSlice' 
+import {login, logout} from '../../app/userSlice';
+
 import './index.scss'
 
 const Login = () => {
@@ -13,14 +14,17 @@ const Login = () => {
     const handelSubmit = (event) => {
         event.preventDefault();
         
-        const username = username.current.value.trim();
-        const password = password.current.value;
         let user = {
-            username: username,
-            password: password
+            username: username.current.value.trim(),
+            password: password.current.value
         }
         axios.post('http://localhost:4000/users/login', user).then(res => {
-            dispatch(login(user))
+            if(!res.data){
+                dispatch(logout())
+            }else{
+                dispatch(login(res.data))
+            }
+            
         } )
         console.log('done!')
     }
@@ -41,7 +45,7 @@ const Login = () => {
                         <label htmlFor="password">Password</label>
                         <input type="password" name="password" id="password" required='true' ref={password}/>
                     </div>
-                    <p className="error">{this.state.error}</p>
+                    <p className="error"></p>
                     
                     <button type="submit">Sign up</button>
                     <div className="bottom-nav">

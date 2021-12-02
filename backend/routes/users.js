@@ -29,11 +29,15 @@ router.post('/signup', (req, res) => {
 router.post('/login', (req, res, next) => {
   passport.authenticate('local', (err, user, info)=> {
       if(err) throw err;
-      if(!user) res.send('no user Exist');
+      if(!user) res.send(null);
       else {
           req.logIn(user, err => {
               if(err) throw err;
-              res.send('Authenticated');
+              let data = {
+                id: user._id,
+                username: user.username
+            }
+              res.send(data);
           })
       }
   })(req,res,next);

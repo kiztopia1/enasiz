@@ -5,5 +5,8 @@ var router = express.Router();
 router.get('/', function(req, res, next) {
   res.send('respond with a resource');
 });
-
+router.post('/signup', (req, res) => {
+  console.log('aga')
+  res.send('done')
+})
 module.exports = router;

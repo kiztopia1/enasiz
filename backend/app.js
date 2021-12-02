@@ -25,6 +25,11 @@ mongoose.connect('mongodb+srv://kirubel:1234@cluster0.dakub.mongodb.net/test?ret
         console.log('db is connected')
     }
 )
+// passport config
+app.use(passport.initialize());
+app.use(passport.session());
+require('./passportConfig')(passport);
+
 // Middleware
 app.use(bodyParse.json());
 app.use(bodyParse.urlencoded({extended: true}));

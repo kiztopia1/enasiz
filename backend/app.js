@@ -12,7 +12,7 @@ const path = require('path');
 const logger = require('morgan');
 
 const app = express()
-const User = require('./user.js')
+const User = require('./schema/user.js')
 
 //mongoose config 
 mongoose.connect('mongodb://localhost/test?retryWrites=true&w=majority',

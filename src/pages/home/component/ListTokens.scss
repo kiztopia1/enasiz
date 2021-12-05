@@ -1,0 +1,32 @@
+@import '../../../variables.scss';
+
+
+.token{
+    background-color: $mid-color;
+    padding:20px 30px;
+    margin-bottom: 30px;
+    line-height: 150%;
+    .head{ 
+        display: flex;
+        justify-content: space-between;
+        
+    }
+
+    .table{
+        border: 1px solid $light-color;
+        border-radius: 3px;
+        margin-top: 20px;
+        
+        .row{
+            border-bottom: 1px solid $light-color;
+            display: flex;
+            justify-content: space-around;
+            text-align: left;
+            width:100%;
+        }
+        .col{
+            width: 33%;
+            padding:7px 20px;
+        }
+    }
+}

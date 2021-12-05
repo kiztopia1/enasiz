@@ -15,7 +15,6 @@ const app = express()
 const User = require('./user.js')
 
 //mongoose config 
-
 mongoose.connect('mongodb://localhost/test?retryWrites=true&w=majority',
     {
         useNewUrlParser: true,
@@ -25,6 +24,7 @@ mongoose.connect('mongodb://localhost/test?retryWrites=true&w=majority',
         console.log('db is connected')
     }
 )
+
 // passport config
 app.use(passport.initialize());
 app.use(passport.session());
@@ -57,15 +57,14 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')));
 
-
-
 // routes 
-
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
-
+const tokensRouter = require('./routes/tokens')
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
+app.use('/tokens', tokensRouter);
+
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));

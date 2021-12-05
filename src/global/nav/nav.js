@@ -1,34 +1,29 @@
-import React,{  } from 'react'
-import { Link } from 'react-router-dom'
-import './index.scss'
-import {selectUser} from '../../app/userSlice'
-class Nav extends React.Component {
-    constructor(props){
-        super(props);
-        this.state ={
-            status:false,
-            class:'',
-            user: selectUser
-        };
+import React,{  useState } from 'react';
+import { Link } from 'react-router-dom';
+import './index.scss';
+import {useSelector} from 'react-redux';
+import {selectUser} from '../../app/userSlice';
 
-        this.menuHandler = this.menuHandler.bind(this);
-    }
-    menuHandler(){
-        if(this.state.class === 'on'){
-            this.setState({class: ''})
+function Nav () {
+    const user = useSelector(selectUser)
+    const [status, setStatus] = useState();
+    const [style, setStyle ] = useState();
+    const menuHandler = () => {
+        if(style === 'on'){
+            setStyle('')
         }else {
-            this.setState({class: 'on'})
+            setStyle('on');
         }
     }
-        render() {
-        return (
-            <nav>
+    console.log(user)
+    return (
+        <nav>
 
                 <Link to='/' ><img src="imgs/logo.svg" alt="" className="logo" /></Link>
-                {this.user}
-                <span className='white menu' onClick={this.menuHandler}>menu</span>
-                <div className={`slide  ${this.state.class}`}>
-                    <img src="imgs/cross.svg" alt="X" className='cross' onClick={this.menuHandler}/>
+                {user? user.username: 'login'}
+                <span className='white menu' onClick={menuHandler}>menu</span>
+                <div className={`slide  ${style}`}>
+                    <img src="imgs/cross.svg" alt="X" className='cross' onClick={menuHandler}/>
                     <ul>
                         <Link to='/login'>Login</Link>
                         <Link to='/'>My Account</Link>
@@ -40,9 +35,7 @@ class Nav extends React.Component {
                     </ul>
                 </div>
             </nav>
-            
-        )
-    }
+    )
 }
 
 export default Nav

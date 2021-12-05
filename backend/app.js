@@ -16,7 +16,7 @@ const User = require('./user.js')
 
 //mongoose config 
 
-mongoose.connect('mongodb+srv://kirubel:1234@cluster0.dakub.mongodb.net/test?retryWrites=true&w=majority',
+mongoose.connect('mongodb://localhost/test?retryWrites=true&w=majority',
     {
         useNewUrlParser: true,
         useUnifiedTopology: true,

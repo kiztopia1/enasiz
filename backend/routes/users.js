@@ -9,7 +9,6 @@ router.get('/', function(req, res, next) {
   res.send('respond with a resource');
 });
 router.post('/signup', (req, res) => {
-
   // check if user found
   User.findOne({username: req.body.username}, async(err, doc) => {
     let hashedPassword = await bcrypt.hash(req.body.password, 10)
@@ -27,6 +26,7 @@ router.post('/signup', (req, res) => {
   })
 });
 router.post('/login', (req, res, next) => {
+  console.log(req.isAuthenticated())
   passport.authenticate('local', (err, user, info)=> {
       if(err) throw err;
       if(!user) res.send(null);
@@ -40,6 +40,7 @@ router.post('/login', (req, res, next) => {
               res.send(data);
           })
       }
+      
   })(req,res,next);
 });
 module.exports = router;

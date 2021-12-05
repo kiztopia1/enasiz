@@ -23,10 +23,11 @@ const Login = () => {
                 dispatch(logout())
             }else{
                 dispatch(login(res.data))
+                
             }
             
         } )
-        console.log('done!')
+
     }
     return(
         <Fragment>

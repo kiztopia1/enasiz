@@ -1,20 +1,25 @@
 import React,{useState, useRef} from 'react'
 import './CreateToken.scss'
-import {useDispatch} from 'react-redux'
+import {useDispatch, useSelector} from 'react-redux'
 import axios from 'axios'
 import {createToken, selectTokens} from './tokenSlice'
+import {selectUser} from '../../../app/userSlice'
+
+
 function CreateToken() {
     const dispatch = useDispatch()
     const [AmountStatus, setAmountStatus] = useState(false)
     const name = useRef('')
     const amount = useRef('')
+    const user = useSelector(selectUser);
     const createToggler = () => {
         setAmountStatus(!AmountStatus)
     }
     const tokenHandler = () => {
         const newToken = {
             name: name.current.value,
-            amount: amount.current.value
+            amount: amount.current.value,
+            userID: user.id
         }
         console.log(newToken)
 

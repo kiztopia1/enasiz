@@ -26,7 +26,7 @@ router.post('/signup', (req, res) => {
   })
 });
 router.post('/login', (req, res, next) => {
-  console.log(req.isAuthenticated())
+  
   passport.authenticate('local', (err, user, info)=> {
       if(err) throw err;
       if(!user) res.send(null);

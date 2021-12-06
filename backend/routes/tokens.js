@@ -14,10 +14,9 @@ router.post('/add', async function(req, res) {
         }
       })
     )
-    res.send(newToken);
+    res.send(newToken)
 });
 router.get('/all', (req, res) => {
-  
   
 })
 module.exports = router;

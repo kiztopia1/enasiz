@@ -4,7 +4,7 @@ import axios from 'axios'
 
 export const loadTokens = createAsyncThunk(
     'tokens/loadTokens',
-    async (amount) => {
+    async () => {
         axios.get('http://localhost:4000/tokens/').then(res => {
             return res.body;
         })
@@ -23,7 +23,7 @@ const tokenSlice = createSlice({
             }
             state.push(newToken)
         }
-    }
+    },
     extraReducers: (builder) => {
     builder
       .addCase(loadTokens.pending, (state) => {

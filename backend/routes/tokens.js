@@ -16,7 +16,8 @@ router.post('/add', async function(req, res) {
     )
     res.send(newToken)
 });
-router.get('/all', (req, res) => {
-  
+router.get('/', (req, res) => {
+  console.log(User.find())
+  res.send('aha')
 })
 module.exports = router;

@@ -16,9 +16,10 @@ router.post('/add', async function(req, res) {
     )
     res.send(newToken)
 });
-router.get('/', (req, res) => {
+router.get('/:id', (req, res) => {
+  const id = req.params.id
   User.find({},(err, user)=> {
-    console.log(user)
+    console.log(id)
   })
   res.send('aha')
 })

@@ -22,6 +22,7 @@ const Login = () => {
             if(!res.data){
                 dispatch(logout())
             }else{
+                console.log(res.data)
                 dispatch(login(res.data))
                 
             }

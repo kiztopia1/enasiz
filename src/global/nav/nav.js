@@ -15,7 +15,7 @@ function Nav () {
             setStyle('on');
         }
     }
-    console.log(user)
+    console.log(user, 'nav user')
     return (
         <nav>
 

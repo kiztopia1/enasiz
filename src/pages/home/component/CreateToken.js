@@ -19,7 +19,8 @@ function CreateToken() {
         const newToken = {
             name: name.current.value,
             amount: amount.current.value,
-            userID: user.id
+            userID: user.id,
+            username: user.username
         }
         axios.post('http://localhost:4000/tokens/add', newToken).then(res => {
             dispatch(setToken(res.data))

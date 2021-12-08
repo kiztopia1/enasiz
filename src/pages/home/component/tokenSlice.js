@@ -1,17 +1,20 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 
-import axios from 'axios'
+
 
 export const loadTokens = createAsyncThunk(
     'tokens/loadTokens',
     async () => {
         console.log('aha')
-        axios.get('http://localhost:4000/tokens/').then(res => {
+        fetch('http://localhost:4000/tokens/').then(res => {
+            console.log(res, 'this is you think')
             return res.body;
+            
         })
          
     }
   );
+
 const tokenSlice = createSlice({
     name: 'tokens',
     initialState: [],
@@ -23,17 +26,25 @@ const tokenSlice = createSlice({
                 amount: action.payload.amount
             }
             state.push(newToken)
+        },
+        setTokens: (state, action) => {
+          action.payload.map(token => state.push(token))
+        },
+        demo: () => {
+          console.log('demo')
         }
     },
-    extraReducers: (builder) => {
-    builder
-      .addCase(loadTokens.pending, (state) => {
-        state.status = 'loading';
-      })
-      .addCase(loadTokens.fulfilled, (state, action) => {
-        state.status = 'idle';
-        state.value += action.payload;
-      });
+    extraReducers: {
+      [loadTokens.pending]: (state, action) => {
+        state.tokens = 'loading';
+      },
+      [loadTokens.fulfilled]: (state, action) => {
+        state.tokens += action.payload;
+      },
+      [loadTokens.rejected]: (state, action) => {
+        console.log(state)
+        
+      }
   },
 })
 // selectors
@@ -41,7 +52,7 @@ export const selectTokens = (state) => state.tokens
 
 
 // actions
-export const {createToken} = tokenSlice.actions;
+export const {createToken, setTokens, demo} = tokenSlice.actions;
 
 
 // reducer

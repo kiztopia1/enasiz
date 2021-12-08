@@ -1,6 +1,6 @@
 import React, {useEffect} from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { selectTokens, loadTokens } from './tokenSlice'
+import { selectTokens, setTokens, demo } from './tokenSlice'
 import { selectUser } from '../../../app/userSlice'
 import axios from 'axios'
 import './ListTokens.scss'
@@ -9,24 +9,13 @@ function ListTokens() {
     const dispatch = useDispatch()
     const user = useSelector(selectUser)
     useEffect(() => {
-        console.log(user,'this is my user')
-        dispatch(loadTokens())
-        if (user.username !== 'login'){
-            axios.get(`http://localhost:4000/tokens/${user.id}`).then(res => {
-            console.log(res.data, 'boom shaka');
-        })
-        }
-        
-        return(null)
-    },[dispatch, user])
-    const boom = () => {
         axios.get(`http://localhost:4000/tokens/${user.id}`).then(res => {
-        return res.body;
-    })
-    }
+            dispatch(setTokens(res.data))
+        })
+    },[dispatch, user])
     return (
         <div className='token-list'>
-            <h3 className='white' onClick={boom()}>tokens</h3>
+            <h3 className='white'>tokeens</h3>
             {tokens.map(token => (
                 <div className='token' key={token.id}> 
 

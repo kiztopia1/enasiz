@@ -21,7 +21,7 @@ router.post('/signup', (req, res) => {
         });
         await newUser.save();
         res.send('user created');
-        console.log(newUser, ' is created')
+        
     }
   })
 });

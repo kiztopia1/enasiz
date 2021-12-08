@@ -18,20 +18,8 @@ router.post('/add', async function(req, res) {
 });
 router.get('/:id', (req, res) => {
   const id = req.params.id
-  User.findOne({_id: id},(err, user)=> {
-    if(user){
-      let tokens = [];
-      
-      user.tokens.map( (id) => {
-        
-        Token.findById(id, (err, token) => {
-          
-          tokens.push(token)
-        })
-      })
-      console.log(tokens, 'result')
-      res.send(tokens)
-    }
+  Token.find({users: id}, (err, doc)=> {
+    res.send(doc)
   })
 
 })

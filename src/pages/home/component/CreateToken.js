@@ -22,7 +22,6 @@ function CreateToken() {
             userID: user.id
         }
         axios.post('http://localhost:4000/tokens/add', newToken).then(res => {
-            console.log('boom this is the log', res.data)
             dispatch(setToken(res.data))
         })
     }

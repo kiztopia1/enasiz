@@ -2,7 +2,8 @@ const mongoose = require('mongoose');
 const tokenSchema = new mongoose.Schema({
     name: String,
     amount:Number,
-    users: [{ type: mongoose.Schema.ObjectId, ref: "Token", username:String }]
+    users: [{ type: mongoose.Schema.ObjectId, ref: "Token"}],
+    usernames:Array 
 });
 
 

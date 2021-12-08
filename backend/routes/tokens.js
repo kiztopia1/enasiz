@@ -6,7 +6,7 @@ const User = require('../schema/user')
 /* GET users listing. */
 router.post('/add', async function(req, res) {
     const {name, amount, userID, username} = req.body
-    const newToken = new Token({name,amount,users: [userID, username]});
+    const newToken = new Token({name,amount,users: [userID], usernames: [username]});
     await newToken.save().then(
       await User.findByIdAndUpdate(userID, {
         $push: {

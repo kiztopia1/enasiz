@@ -1,11 +1,24 @@
-import React{use} from 'react'
-import { useSelector } from 'react-redux'
-import { selectTokens } from './tokenSlice'
+import React, {useEffect} from 'react'
+import { useSelector, useDispatch } from 'react-redux'
+import { selectTokens, loadTokens } from './tokenSlice',
+import { selectUser } from '../../../app/userSlice'
+import axios from 'axios'
 import './ListTokens.scss'
 function ListTokens() {
     const tokens = useSelector(selectTokens);
+    const dispatch = useDispatch()
+    const user = useSelector(selectUser)
+    useEffect(() => {
+        console.log('aha')
+        dispatch(loadTokens())
+        axios.get(`http://localhost:4000/tokens/${user._id}`).then(res => {
+            return res.body;
+        })
+        return(null)
+    },[dispatch])
     return (
         <div className='token-list'>
+            <h3 className='white'>tokens</h3>
             {tokens.map(token => (
                 <div className='token' key={token.id}> 
 

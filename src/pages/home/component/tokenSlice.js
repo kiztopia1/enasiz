@@ -5,6 +5,7 @@ import axios from 'axios'
 export const loadTokens = createAsyncThunk(
     'tokens/loadTokens',
     async () => {
+        console.log('aha')
         axios.get('http://localhost:4000/tokens/').then(res => {
             return res.body;
         })

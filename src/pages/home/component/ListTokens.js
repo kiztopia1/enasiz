@@ -31,16 +31,14 @@ function ListTokens() {
                             <span className="col-1 col">User id</span>
                             <span className="col-1 col"> amount</span>
                         </div>
-                        <div className="r2 row">
-                            <span className="col-1 col">kiztopia1 <span className='online'></span> </span>
-                            <span className="col-1 col">h34h-34h-34sf-94-</span>
-                            <span className="col-1 col">1000</span>
-                        </div>
-                        <div className="r2 row">
-                            <span className="col-1 col">alpha334</span>
-                            <span className="col-1 col">ks3h-33h-34sf-24-</span>
-                            <span className="col-1 col">1000</span>
-                        </div>
+                        {token.usernames.map(username => (
+                            <div className="r2 row">
+                                <span className="col-1 col">{username}</span>
+                                <span className="col-1 col">{token.users[token.usernames.indexOf(username)]}</span>
+                                <span className="col-1 col">{token.amount}</span>
+                            </div>
+                        ))}
+                        
                     </div>
                 </div>
                 

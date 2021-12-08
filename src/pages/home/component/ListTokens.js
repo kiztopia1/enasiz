@@ -9,16 +9,24 @@ function ListTokens() {
     const dispatch = useDispatch()
     const user = useSelector(selectUser)
     useEffect(() => {
-        console.log(user)
+        console.log(user,'this is my user')
         dispatch(loadTokens())
-        axios.get(`http://localhost:4000/tokens/${user._id}`).then(res => {
-            return res.body;
+        if (user.username !== 'login'){
+            axios.get(`http://localhost:4000/tokens/${user.id}`).then(res => {
+            console.log(res.data, 'boom shaka');
         })
+        }
+        
         return(null)
     },[dispatch, user])
+    const boom = () => {
+        axios.get(`http://localhost:4000/tokens/${user.id}`).then(res => {
+        return res.body;
+    })
+    }
     return (
         <div className='token-list'>
-            <h3 className='white'>tokens</h3>
+            <h3 className='white' onClick={boom()}>tokens</h3>
             {tokens.map(token => (
                 <div className='token' key={token.id}> 
 
@@ -26,7 +34,7 @@ function ListTokens() {
                         <h4>{token.name}</h4>
                         <h4>{token.id} copy</h4>
                     </div>
-                    <p>amount {token.amount} birr</p>
+                    <p >amount {token.amount} birr</p>
 
                     <div className="table">
                     <div className="r1 row">

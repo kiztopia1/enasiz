@@ -23,4 +23,4 @@ export const counterSlice = createSlice({
   export const { login, logout } = counterSlice.actions;
   export const selectUser = (state) => state.user;
   
-  export default counterSlice.reducer;
+  export default counterSlice.reducer

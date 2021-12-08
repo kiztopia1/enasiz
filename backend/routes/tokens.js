@@ -6,7 +6,7 @@ const User = require('../schema/user')
 /* GET users listing. */
 router.post('/add', async function(req, res) {
     const {name, amount, userID} = req.body
-    const newToken = new Token({name:name,amount});
+    const newToken = new Token({name,amount,users: [userID]});
     await newToken.save().then(
       await User.findByIdAndUpdate(userID, {
         $push: {
@@ -18,9 +18,21 @@ router.post('/add', async function(req, res) {
 });
 router.get('/:id', (req, res) => {
   const id = req.params.id
-  User.find({},(err, user)=> {
-    console.log(id)
+  User.findOne({_id: id},(err, user)=> {
+    if(user){
+      let tokens = [];
+      
+      user.tokens.map( (id) => {
+        
+        Token.findById(id, (err, token) => {
+          
+          tokens.push(token)
+        })
+      })
+      console.log(tokens, 'result')
+      res.send(tokens)
+    }
   })
-  res.send('aha')
+
 })
 module.exports = router;

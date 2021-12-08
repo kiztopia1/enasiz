@@ -27,11 +27,12 @@ const tokenSlice = createSlice({
             }
             state.push(newToken)
         },
+        setToken: (state, action) => {
+          console.log(action.payload, 'this is the new reducer')
+          state.push(action.payload)
+        },
         setTokens: (state, action) => {
           action.payload.map(token => state.push(token))
-        },
-        demo: () => {
-          console.log('demo')
         }
     },
     extraReducers: {
@@ -52,7 +53,7 @@ export const selectTokens = (state) => state.tokens
 
 
 // actions
-export const {createToken, setTokens, demo} = tokenSlice.actions;
+export const {createToken, setTokens, setToken} = tokenSlice.actions;
 
 
 // reducer

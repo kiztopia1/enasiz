@@ -2,7 +2,7 @@ import React,{useState, useRef} from 'react'
 import './CreateToken.scss'
 import {useDispatch, useSelector} from 'react-redux'
 import axios from 'axios'
-import {createToken, selectTokens} from './tokenSlice'
+import {setToken} from './tokenSlice'
 import {selectUser} from '../../../app/userSlice'
 
 
@@ -21,10 +21,10 @@ function CreateToken() {
             amount: amount.current.value,
             userID: user.id
         }
-        console.log(newToken)
-
-        axios.post('http://localhost:4000/tokens/add', newToken).then(res => console.log(res.data))
-        dispatch(createToken(newToken))
+        axios.post('http://localhost:4000/tokens/add', newToken).then(res => {
+            console.log('boom this is the log', res.data)
+            dispatch(setToken(res.data))
+        })
     }
 
     return (

@@ -28,32 +28,38 @@ router.post('/connect', async(req, res) => {
   const {tokenID, userID}  = req.body
   let token = null
   let user = null
-  await Token.findOne({_id: tokenID},(err, doc) => token = doc ).then( async() => {
+  // checking if user is already connected
+  const value = User.find({tokens:tokenID}).count()
+  if (value == 0 ){
+    await Token.findOne({_id: tokenID},(err, doc) => token = doc ).then( async() => {
     
-    await User.findById(userID,(err, doc) => user = doc).then(async () => {
-
-      console.log('user',user,'token',token, 'amount', token.amount)
-      await Token.findByIdAndUpdate(tokenID, {
-        $push: {
-          users: userID,
-          usernames: user.username
-        }
-      })
-      await User.findByIdAndUpdate(userID, {
-        $push: {
-          tokens: tokenID
-        },
-        $inc: {balance: -(token.amount)}
-      }).then( async() => {
-        await Token.findOne({_id:tokenID}, (err,doc) => {
-          res.send(doc)
+      await User.findById(userID,(err, doc) => user = doc).then(async () => {
+  
+        console.log('user',user,'token',token, 'amount', token.amount)
+        await Token.findByIdAndUpdate(tokenID, {
+          $push: {
+            users: userID,
+            usernames: user.username
+          }
         })
-      })
-    }
-    )
-
+        await User.findByIdAndUpdate(userID, {
+          $push: {
+            tokens: tokenID
+          },
+          $inc: {balance: -(token.amount)}
+        }).then( async() => {
+          await Token.findOne({_id:tokenID}, (err,doc) => {
+            res.send(doc)
+          })
+        })
+      }
+      )
+  
+    })
+  }else{
+    res.send({error:'already connected'})
   }
-
-  )
+  
+  
 })
 module.exports = router;

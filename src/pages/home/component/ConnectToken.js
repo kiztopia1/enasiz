@@ -19,7 +19,13 @@ function ConnectToken() {
         const body = {tokenID: id.current.value, userID: user.id,username: user.username}
         console.log(body)
         axios.post('http://localhost:4000/tokens/connect', body).then(res => {
-            dispatch(setToken(res.data))
+            console.log(res.data)
+            if(! res.data.err){
+                dispatch(setToken(res.data))
+            }else{
+                console.log(res.data.err)
+            }
+            
         })
     }
     return (

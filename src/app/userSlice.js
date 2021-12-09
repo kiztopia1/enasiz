@@ -17,10 +17,13 @@ export const counterSlice = createSlice({
       logout: (state) => {
         state.user = null
       },
+      updateBalance: (state, {payload}) => {
+        state.balance = state.balance - payload.amount
+      }
     }
   });
 
-  export const { login, logout } = counterSlice.actions;
+  export const { login, logout, updateBalance } = counterSlice.actions;
   export const selectUser = (state) => state.user;
   
   export default counterSlice.reducer

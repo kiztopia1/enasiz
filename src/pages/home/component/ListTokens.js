@@ -13,6 +13,9 @@ function ListTokens() {
             dispatch(setTokens(res.data))
         })
     },[dispatch, user])
+    const activationHandler = () => {
+        
+    }
     return (
         <div className='token-list'>
             <h3 className='white'>tokeens</h3>
@@ -23,7 +26,11 @@ function ListTokens() {
                         <h4>{token.name}</h4>
                         <h4>{token._id} copy</h4>
                     </div>
-                    <p >amount {token.amount} birr</p>
+                    <div className="head">
+                        <p >amount {token.amount} birr</p>
+                        <p>{token.status}</p>
+                    </div>
+                    
 
                     <div className="table">
                     <div className="r1 row">
@@ -40,6 +47,7 @@ function ListTokens() {
                         ))}
                         
                     </div>
+                    <button onClick={activationHandler}>activate</button>
                 </div>
                 
             ))}

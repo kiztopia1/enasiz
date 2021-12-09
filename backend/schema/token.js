@@ -6,6 +6,4 @@ const tokenSchema = new mongoose.Schema({
     usernames:Array,
     status: String
 });
-
-
 module.exports = mongoose.model('Token', tokenSchema);

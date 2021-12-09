@@ -3,7 +3,8 @@ const tokenSchema = new mongoose.Schema({
     name: String,
     amount:Number,
     users: [{ type: mongoose.Schema.ObjectId, ref: "Token"}],
-    usernames:Array 
+    usernames:Array,
+    status: String
 });
 
 

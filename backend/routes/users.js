@@ -17,7 +17,8 @@ router.post('/signup', (req, res) => {
     if(!doc) {
         const newUser = new User({
             username: req.body.username,
-            password: hashedPassword
+            password: hashedPassword,
+            balance: '100'
         });
         await newUser.save();
         res.send('user created');

@@ -3,7 +3,7 @@ import './CreateToken.scss'
 import {useDispatch, useSelector} from 'react-redux'
 import axios from 'axios'
 import {setToken} from './tokenSlice'
-import {selectUser} from '../../../app/userSlice'
+import {selectUser, updateBalance} from '../../../app/userSlice'
 
 
 function CreateToken() {
@@ -24,6 +24,7 @@ function CreateToken() {
         }
         axios.post('http://localhost:4000/tokens/add', newToken).then(res => {
             dispatch(setToken(res.data))
+            dispatch(updateBalance({amount: res.data.amount}))
         })
     }
 

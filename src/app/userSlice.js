@@ -18,7 +18,6 @@ export const counterSlice = createSlice({
         state.user = null
       },
       updateBalance: (state, {payload}) => {
-        console.log('aha')
         state.balance = state.balance - payload.amount
       }
     }

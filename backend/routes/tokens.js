@@ -24,4 +24,17 @@ router.get('/:id', (req, res) => {
   })
 
 })
+router.post('/connect', async(req, res) => {
+  const {tokenID, userID}  = req.body
+  await Token.findByIdAndUpdate(tokenID, {
+    $push: {
+      users: userID
+    }
+  })
+  await User.findByIdAndUpdate(userID, {
+    $push: {
+      tokens: tokenID
+    }
+  })
+})
 module.exports = router;

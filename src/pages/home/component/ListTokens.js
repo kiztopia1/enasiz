@@ -21,7 +21,7 @@ function ListTokens() {
 
                     <div className="head">
                         <h4>{token.name}</h4>
-                        <h4>{token.id} copy</h4>
+                        <h4>{token._id} copy</h4>
                     </div>
                     <p >amount {token.amount} birr</p>
 

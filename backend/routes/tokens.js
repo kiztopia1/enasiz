@@ -11,7 +11,8 @@ router.post('/add', async function(req, res) {
       await User.findByIdAndUpdate(userID, {
         $push: {
           tokens: newToken._id
-        }
+        },
+        $inc: {balance: -(newToken.amount)}
       })
     )
     res.send(newToken)

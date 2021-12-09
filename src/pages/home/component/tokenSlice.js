@@ -28,7 +28,6 @@ const tokenSlice = createSlice({
             state.push(newToken)
         },
         setToken: (state, action) => {
-          console.log(action.payload, 'this is the new reducer')
           state.push(action.payload)
         },
         setTokens: (state, action) => {

@@ -1,6 +1,6 @@
 import React, {useEffect} from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { selectTokens, setTokens, demo } from './tokenSlice'
+import { selectTokens, setTokens } from './tokenSlice'
 import { selectUser } from '../../../app/userSlice'
 import axios from 'axios'
 import './ListTokens.scss'

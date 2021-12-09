@@ -25,20 +25,35 @@ router.get('/:id', (req, res) => {
 
 })
 router.post('/connect', async(req, res) => {
-  const {tokenID, userID, username}  = req.body
-  const token = Token.findById(tokenID)
-  const user = User.findById(userID)
-  await Token.findByIdAndUpdate(tokenID, {
-    $push: {
-      users: userID,
-      usernames: user.username
+  const {tokenID, userID}  = req.body
+  let token = null
+  let user = null
+  await Token.findOne({_id: tokenID},(err, doc) => token = doc ).then( async() => {
+    
+    await User.findById(userID,(err, doc) => user = doc).then(async () => {
+
+      console.log('user',user,'token',token, 'amount', token.amount)
+      await Token.findByIdAndUpdate(tokenID, {
+        $push: {
+          users: userID,
+          usernames: user.username
+        }
+      })
+      await User.findByIdAndUpdate(userID, {
+        $push: {
+          tokens: tokenID
+        },
+        $inc: {balance: -(token.amount)}
+      }).then( async() => {
+        await Token.findOne({_id:tokenID}, (err,doc) => {
+          res.send(doc)
+        })
+      })
     }
-  })
-  await User.findByIdAndUpdate(userID, {
-    $push: {
-      tokens: tokenID
-    },
-    $inc: {balance: -(token.amount)}
-  })
+    )
+
+  }
+
+  )
 })
 module.exports = router;

@@ -20,7 +20,8 @@ function Nav () {
         <nav>
 
                 <Link to='/' ><img src="imgs/logo.svg" alt="" className="logo" /></Link>
-                {user? user.username: 'login'}
+                <span>{user? user.balance: 'aha'}</span>
+                {user? user.balance: 'login'}
                 <span className='white menu' onClick={menuHandler}>menu</span>
                 <div className={`slide  ${style}`}>
                     <img src="imgs/cross.svg" alt="X" className='cross' onClick={menuHandler}/>

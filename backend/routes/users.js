@@ -36,7 +36,8 @@ router.post('/login', (req, res, next) => {
               if(err) throw err;
               let data = {
                 id: user._id,
-                username: user.username
+                username: user.username,
+                balance: Number(user.balance)
             }
               res.send(data);
           })

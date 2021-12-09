@@ -22,7 +22,7 @@ const Login = () => {
             if(!res.data){
                 dispatch(logout())
             }else{
-                console.log(res.data)
+                console.log(res.data, 'this is the data')
                 dispatch(login(res.data))
                 
             }

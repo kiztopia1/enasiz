@@ -29,6 +29,7 @@ function CreateToken() {
 
     return (
         <div className='create-token'>
+            
             <div className="create">
                 <span className="create-btn" onClick={createToggler}>Creat Token</span>
                 <div className={"form " + (AmountStatus? ' show' : ' hide')}>

@@ -4,7 +4,7 @@ import {useDispatch, useSelector} from 'react-redux'
 import axios from 'axios'
 import {setToken} from './tokenSlice'
 import {selectUser, updateBalance} from '../../../app/userSlice'
-
+import ConnectToken from './ConnectToken'
 
 function CreateToken() {
     const dispatch = useDispatch()
@@ -45,9 +45,7 @@ function CreateToken() {
                     <button className='btn' onClick={tokenHandler}>create token</button>
                 </div>
             </div>
-            <div className="connect">
-            <span className="connect-btn">Connect</span>
-            </div>
+            <ConnectToken/>
         </div>
     )
 }

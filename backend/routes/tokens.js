@@ -25,10 +25,12 @@ router.get('/:id', (req, res) => {
 
 })
 router.post('/connect', async(req, res) => {
-  const {tokenID, userID}  = req.body
+  const {tokenID, userID, username}  = req.body
+  console.log(tokenID, userID, 'post')
   await Token.findByIdAndUpdate(tokenID, {
     $push: {
-      users: userID
+      users: userID,
+      usernames: username
     }
   })
   await User.findByIdAndUpdate(userID, {

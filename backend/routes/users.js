@@ -18,7 +18,8 @@ router.post('/signup', (req, res) => {
         const newUser = new User({
             username: req.body.username,
             password: hashedPassword,
-            balance: '100'
+            balance: '100',
+            tokens: []
         });
         await newUser.save();
         res.send('user created');
@@ -37,7 +38,8 @@ router.post('/login', (req, res, next) => {
               let data = {
                 id: user._id,
                 username: user.username,
-                balance: Number(user.balance)
+                balance: Number(user.balance),
+                tokens:user.tokens
             }
               res.send(data);
           })

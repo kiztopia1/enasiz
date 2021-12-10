@@ -6,20 +6,22 @@ const User = require('../schema/user')
 /* GET users listing. */
 router.post('/add', async function(req, res) {
     const {name, amount, userID, username} = req.body
-    const newToken = new Token({name,amount,users: [userID], usernames: [username], status:"open"});
+    const newToken = new Token({name,amount,users: [{id:userID,username}], status:"open"});
     await newToken.save().then(
       await User.findByIdAndUpdate(userID, {
         $push: {
-          tokens: newToken._id
+          tokens: {id:newToken._id,name:newToken.name}
         },
         $inc: {balance: -(newToken.amount)}
       })
     )
     res.send(newToken)
 });
-router.get('/:id', (req, res) => {
+router.get('/:id/:name', (req, res) => {
   const id = req.params.id
-  Token.find({users: id}, (err, doc)=> {
+  const name = req.params.name
+  const data ={id:id, username:name}
+  Token.find({users: data}, (err, doc)=> {
     res.send(doc)
   })
 
@@ -38,13 +40,12 @@ router.post('/connect', async(req, res) => {
         console.log('user',user,'token',token, 'amount', token.amount)
         await Token.findByIdAndUpdate(tokenID, {
           $push: {
-            users: userID,
-            usernames: user.username
+            users: {id:userID,username:user.username}
           }
         })
         await User.findByIdAndUpdate(userID, {
           $push: {
-            tokens: tokenID
+            tokens: {id:tokenID,name:token.name}
           },
           $inc: {balance: -(token.amount)}
         }).then( async() => {
@@ -59,6 +60,11 @@ router.post('/connect', async(req, res) => {
   }else{
     res.send({error:'already connected'})
   }
+
+router.post('/activate', (req, res) => {
+  const {tokenID, userID}  = req.body
+  
+})
   
   
 })

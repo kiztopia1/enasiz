@@ -9,8 +9,12 @@ function ListTokens() {
     const dispatch = useDispatch()
     const user = useSelector(selectUser)
     useEffect(() => {
-        axios.get(`http://localhost:4000/tokens/${user.id}`).then(res => {
-            dispatch(setTokens(res.data))
+        axios.get(`http://localhost:4000/tokens/${user.id}/${user.username}`).then(res => {
+            console.log(res.data, 'boom kira')
+            if(res.data.length !==0 ){
+                dispatch(setTokens(res.data))
+            }
+            
         })
     },[dispatch, user])
     const activationHandler = () => {
@@ -38,10 +42,10 @@ function ListTokens() {
                             <span className="col-1 col">User id</span>
                             <span className="col-1 col"> amount</span>
                         </div>
-                        {token.usernames.map(username => (
+                        {token.users.map(data => (
                             <div className="r2 row">
-                                <span className="col-1 col">{username}</span>
-                                <span className="col-1 col">{token.users[token.usernames.indexOf(username)]}</span>
+                                <span className="col-1 col">{data.username}</span>
+                                <span className="col-1 col">{data.id}</span>
                                 <span className="col-1 col">{token.amount}</span>
                             </div>
                         ))}

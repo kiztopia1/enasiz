@@ -31,6 +31,7 @@ const tokenSlice = createSlice({
           state.push(action.payload)
         },
         setTokens: (state, action) => {
+          state = state.filter(token => token == 'null')
           action.payload.map(token => state.push(token))
         }
     },

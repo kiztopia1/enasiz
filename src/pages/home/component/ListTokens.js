@@ -8,15 +8,16 @@ function ListTokens() {
     const tokens = useSelector(selectTokens);
     const dispatch = useDispatch()
     const user = useSelector(selectUser)
+    const effectConst = 1
     useEffect(() => {
         axios.get(`http://localhost:4000/tokens/${user.id}/${user.username}`).then(res => {
             console.log(res.data, 'boom kira')
             if(res.data.length !==0 ){
                 dispatch(setTokens(res.data))
             }
-            
         })
-    },[dispatch, user])
+        return (effectConst)
+    },[ effectConst])
     const activationHandler = () => {
         
     }

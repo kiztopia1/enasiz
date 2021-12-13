@@ -20,7 +20,7 @@ function ConnectToken() {
         console.log(body)
         axios.post('http://localhost:4000/tokens/connect', body).then(res => {
             console.log(res.data)
-            if(! res.data.err){
+            if(! res.data.error){
                 dispatch(setToken(res.data))
             }else{
                 console.log(res.data.err)

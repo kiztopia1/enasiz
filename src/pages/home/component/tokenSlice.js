@@ -5,9 +5,7 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 export const loadTokens = createAsyncThunk(
     'tokens/loadTokens',
     async () => {
-        console.log('aha')
         fetch('http://localhost:4000/tokens/').then(res => {
-            console.log(res, 'this is you think')
             return res.body;
             
         })
@@ -31,8 +29,12 @@ const tokenSlice = createSlice({
           state.push(action.payload)
         },
         setTokens: (state, action) => {
-          state = state.filter(token => token == 'null')
-          action.payload.map(token => state.push(token))
+          if (state.length == 0) {
+            action.payload.map(token => state.push(token))
+          }else{
+            state = state.filter(token => token == 'null')
+            action.payload.map(token => state.push(token))
+          }
         }
     },
     extraReducers: {
@@ -43,7 +45,6 @@ const tokenSlice = createSlice({
         state.tokens += action.payload;
       },
       [loadTokens.rejected]: (state, action) => {
-        console.log(state)
         
       }
   },

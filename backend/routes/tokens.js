@@ -22,6 +22,7 @@ router.get('/:id/:name', (req, res) => {
   const name = req.params.name
   const data ={id:id, username:name}
   Token.find({users: data}, (err, doc)=> {
+    console.log(doc)
     res.send(doc)
   })
 

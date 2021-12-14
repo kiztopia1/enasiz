@@ -8,9 +8,9 @@ function Home() {
     return (
         <div className='home'>
             <Nav/>
-            <div className='main-div'>
+            <div className='main-container'>
                     <Aside></Aside>
-                <div>
+                <div className="main-main">
                     <CreateToken/>
                     <ListToken/>
                 </div>

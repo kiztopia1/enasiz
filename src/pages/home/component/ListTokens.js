@@ -1,28 +1,27 @@
 import React, {useEffect, useState} from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { loadTokens, selectTokens, setTokens } from './tokenSlice'
+import {  selectTokens, setTokens } from './tokenSlice'
 import { selectUser } from '../../../app/userSlice'
 import axios from 'axios'
 import './ListTokens.scss'
 function ListTokens() {
-    const [isUser, setIsUser] = useState(false)
     const tokens = useSelector(selectTokens);
     const dispatch = useDispatch()
     const user = useSelector(selectUser)
 
-    const loadingTokens = () => {
-        axios.get(`http://localhost:4000/tokens/${user.id}/${user.username}`).then(res => {
-            if(res.data.length !==0 ){
-                dispatch(setTokens(res.data))
-            }
-        })
-        dispatch(loadTokens())
-    }
+    
     useEffect(() => {
-        if(isUser) {
+        const loadingTokens = () => {
+            axios.get(`http://localhost:4000/tokens/${user.id}/${user.username}`).then(res => {
+                if(res.data.length !==0 ){
+                    dispatch(setTokens(res.data))
+                }
+            })
+        }
+        if(user.username !== 'login') {
             loadingTokens()
         }
-    },[])
+    },[user.username, dispatch, user.id ])
     const activationHandler = () => {
         
     }
@@ -64,7 +63,13 @@ function ListTokens() {
             ))}
         </div>
     )
-    return isUser ? data : 'aha'
+    if(user.username == 'login'){
+        return 'login to see you tokens'
+    } if  (user.username !== 'login') {
+        return data
+    } else {
+        return 'error'
+    }
 }
 
 export default ListTokens

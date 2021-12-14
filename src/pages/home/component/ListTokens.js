@@ -1,6 +1,6 @@
 import React, {useEffect} from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { selectTokens, setTokens } from './tokenSlice'
+import { loadTokens, selectTokens, setTokens } from './tokenSlice'
 import { selectUser } from '../../../app/userSlice'
 import axios from 'axios'
 import './ListTokens.scss'
@@ -10,12 +10,13 @@ function ListTokens() {
     const user = useSelector(selectUser)
     useEffect(() => {
         axios.get(`http://localhost:4000/tokens/${user.id}/${user.username}`).then(res => {
-            console.log(res.data.length, 'boom kira')
             if(res.data.length !==0 ){
-                console.log(res.data, 'boom kira')
+                
                 dispatch(setTokens(res.data))
             }
         })
+        console.log('boom kira')
+        dispatch(loadTokens())
     },[user, dispatch])
     const activationHandler = () => {
         

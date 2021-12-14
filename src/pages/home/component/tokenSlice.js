@@ -5,9 +5,9 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 export const loadTokens = createAsyncThunk(
     'tokens/loadTokens',
     async () => {
-        fetch('http://localhost:4000/tokens/').then(res => {
-            return res.body;
-            
+      console.log('thunk exe')
+        return fetch('http://localhost:4000/tokens/').then(res => {
+            res.json()
         })
          
     }
@@ -21,7 +21,7 @@ const tokenSlice = createSlice({
             const newToken ={
                 id: Date.now(),
                 name: action.payload.name,
-                amount: action.payload.amount
+                amount:  action.payload.amount
             }
             state.push(newToken)
         },
@@ -40,12 +40,14 @@ const tokenSlice = createSlice({
     extraReducers: {
       [loadTokens.pending]: (state, action) => {
         state.tokens = 'loading';
+        console.log('loading')
       },
       [loadTokens.fulfilled]: (state, action) => {
         state.tokens += action.payload;
+        console.log('fulfilled')
       },
       [loadTokens.rejected]: (state, action) => {
-        
+        console.log('rejected')
       }
   },
 })

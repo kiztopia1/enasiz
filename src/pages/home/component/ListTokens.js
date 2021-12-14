@@ -1,27 +1,33 @@
-import React, {useEffect} from 'react'
+import React, {useEffect, useState} from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { loadTokens, selectTokens, setTokens } from './tokenSlice'
 import { selectUser } from '../../../app/userSlice'
 import axios from 'axios'
 import './ListTokens.scss'
 function ListTokens() {
+    const [isUser, setIsUser] = useState(false)
     const tokens = useSelector(selectTokens);
     const dispatch = useDispatch()
     const user = useSelector(selectUser)
-    useEffect(() => {
+
+    const loadingTokens = () => {
         axios.get(`http://localhost:4000/tokens/${user.id}/${user.username}`).then(res => {
             if(res.data.length !==0 ){
-                
                 dispatch(setTokens(res.data))
             }
         })
-        console.log('boom kira')
         dispatch(loadTokens())
-    },[user, dispatch])
+    }
+    useEffect(() => {
+        if(isUser) {
+            loadingTokens()
+        }
+    },[])
     const activationHandler = () => {
         
     }
-    return (
+
+    const data = (
         <div className='token-list'>
             <h3 className='white'>tokeens</h3>
             {tokens.map(token => (
@@ -58,6 +64,7 @@ function ListTokens() {
             ))}
         </div>
     )
+    return isUser ? data : 'aha'
 }
 
 export default ListTokens

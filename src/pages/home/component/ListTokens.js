@@ -28,7 +28,7 @@ function ListTokens() {
 
     const data = (
         <div className='token-list'>
-            <h3 className='white'>tokeens</h3>
+            <h3 className='white'>tokens</h3>
             {tokens.map(token => (
                 <div className='token' key={token.id}> 
 

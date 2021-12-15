@@ -33,7 +33,7 @@ router.post('/connect', async(req, res) => {
   let user = null
   
 
-await Token.findOne({_id: tokenID},(err, doc) => {
+await Token.findOne({_id: tokenID.trim()},(err, doc) => {
   token = doc
   const demoUser = {
     'id':userID,

@@ -1,22 +1,21 @@
-import React, { Fragment } from 'react'
+import React,{useRef, useState} from 'react'
 import { Link } from 'react-router-dom';
 import axios from 'axios'
 import './index.scss'
 import Nav from '../../global/nav/nav'
 
-class Signup extends React.Component {
-    constructor(props){
-        super(props);
-        this.state = {error: ''}
-        this.handelSubmit = this.handelSubmit.bind(this)
-    }
 
-    handelSubmit(event){
+function Signup() {
+    const [error, setError] = useState({})
+    const refUsername = useRef(null)
+    const refPassword = useRef(null)
+    const refPassword1 = useRef(null)
+    const handelSubmit =(event) => {
         event.preventDefault();
-        const data = new FormData(event.target)
-        const username = data.get('username').trim();
-        const password1 = data.get('password');
-        const password2 = data.get('password2');
+
+        const username = refUsername.current.value.trim();
+        const password1 = refPassword.current.value;
+        const password2 = refPassword1.current.value
         if (password1 === password2){
 
             let user = {
@@ -32,29 +31,28 @@ class Signup extends React.Component {
             console.log(username, 'add something correct')
         }
     }
-    render () {
-        return ( 
-            <Fragment>
-                <Nav/>
+    return (
+        <div>
+            <Nav/>
                 <div className='main'>
                 
                 <div className="cont">
                 
                 <h2>Sign up</h2>
-                <form onSubmit={this.handelSubmit}>
+                <form onSubmit={handelSubmit}>
                     <div className="input-cont">
                         <label htmlFor="username">user name</label>
-                        <input type="text" name="username" id="username" required='true' />
+                        <input type="text" name="username" id="username" required='true' ref={refUsername}/>
                     </div>
                     <div className="input-cont">
                         <label htmlFor="password">Password</label>
-                        <input type="password" name="password" id="password" required='true'/>
+                        <input type="password" name="password" id="password" required='true' ref={refPassword}/>
                     </div>
                     <div className="input-cont">
                         <label htmlFor="password2">confirm password</label>
-                        <input type='password' name='password2' id="password2" required='true'/>
+                        <input type='password' name='password2' id="password2" required='true' ref={refPassword1} />
                     </div>
-                    <p className="error">{this.state.error}</p>
+                    <p className="error"></p>
                     
                     <button type="submit">Sign up</button>
                 </form>
@@ -65,10 +63,8 @@ class Signup extends React.Component {
                 </div>
                 
             </div>
-            </Fragment>
-            
-        )
-        }
+        </div>
+    )
 }
 
 export default Signup

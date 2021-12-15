@@ -8,7 +8,7 @@ const passport = require('passport')
 router.get('/', function(req, res, next) {
   res.send('respond with a resource');
 });
-router.post('/signup', (req, res) => {
+router.post('/signup', (req, res, next) => {
   // check if user found
   User.findOne({username: req.body.username}, async(err, doc) => {
     let hashedPassword = await bcrypt.hash(req.body.password, 10)
@@ -22,6 +22,23 @@ router.post('/signup', (req, res) => {
             tokens: []
         });
         await newUser.save();
+        passport.authenticate('local', (err, newUser, info)=> {
+          if(err) throw err;
+          if(!newUser) res.send(null);
+          else {
+              req.logIn(newUser, err => {
+                  if(err) throw err;
+                  let data = {
+                    id: newUser._id,
+                    username: newUser.username,
+                    balance: Number(newUser.balance),
+                    tokens:newUser.tokens
+                }
+                  res.send(data);
+              })
+          }
+          
+      })(req,res,next);
         res.send('user created');
         
     }

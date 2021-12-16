@@ -1,11 +1,14 @@
 import React,{useRef, useState} from 'react'
-import { Link } from 'react-router-dom';
+import { Link, useNavigate  } from 'react-router-dom';
 import axios from 'axios'
 import './index.scss'
 import Nav from '../../global/nav/nav'
 
 
 function Signup() {
+
+    const navigate = useNavigate();
+    
     const [error, setError] = useState({})
     const refUsername = useRef(null)
     const refPassword = useRef(null)
@@ -26,6 +29,7 @@ function Signup() {
                 console.log(res)
             } )
             console.log('done!')
+            navigate("/login")
         }else{
             this.setState({error: 'password doesnot match'})
             console.log(username, 'add something correct')

@@ -6,11 +6,11 @@ const User = require('../schema/user')
 /* GET users listing. */
 router.post('/add', async function(req, res) {
     const {name, amount, userID, username} = req.body
-    const newToken = new Token({name,amount,users: [{id:userID,username}], status:"open"});
+    const newToken = new Token({name,amount,users: [{id:userID,username, status: 'open'}], status:"open"});
     await newToken.save().then(
       await User.findByIdAndUpdate(userID, {
         $push: {
-          tokens: {id:newToken._id,name:newToken.name}
+          tokens: {id:newToken._id,name:newToken.name, }
         },
         $inc: {balance: -(newToken.amount)}
       })
@@ -49,7 +49,7 @@ await Token.findOne({_id: tokenID.trim()},(err, doc) => {
     
         await Token.findByIdAndUpdate(tokenID, {
         $push: {
-          users: {id:userID,username:user.username}
+          users: {id:userID,username:user.username, status: 'open'}
         }
       })
         await User.findByIdAndUpdate(userID, {

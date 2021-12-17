@@ -12,7 +12,7 @@ function ListTokens() {
     
     useEffect(() => {
         const loadingTokens = () => {
-            axios.get(`http://localhost:4000/tokens/${user.id}/${user.username}`).then(res => {
+            axios.get(`http://localhost:4000/tokens/$`).then(res => {
                 if(res.data.length !==0 ){
                     dispatch(setTokens(res.data))
                 }
@@ -22,8 +22,15 @@ function ListTokens() {
             loadingTokens()
         }
     },[user.username, dispatch, user.id ])
-    const activationHandler = () => {
-        
+    const activationHandler = (id) => {
+        const data = {
+            tokenID: id,
+            userID: user.id
+        }
+        axios.post('http://localhost:4000/tokens/activate', data).then(res => {
+            console.log(res.data)
+        }
+        )
     }
 
     const data = (
@@ -57,7 +64,7 @@ function ListTokens() {
                         ))}
                         
                     </div>
-                    <button onClick={activationHandler}>activate</button>
+                    <button onClick={activationHandler(token.id)}>activate</button>
                 </div>
                 
             ))}

@@ -67,9 +67,8 @@ await Token.findOne({_id: tokenID.trim()},(err, doc) => {
   }
 })
 
-router.post('/activate', (req, res) => {
+router.post('/activate/', (req, res) => {
   const {tokenID, userID}  = req.body
-  
 })
   
   

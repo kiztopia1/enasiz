@@ -22,23 +22,6 @@ router.post('/signup', (req, res, next) => {
             tokens: []
         });
         await newUser.save();
-        passport.authenticate('local', (err, newUser, info)=> {
-          if(err) throw err;
-          if(!newUser) res.send(null);
-          else {
-              req.logIn(newUser, err => {
-                  if(err) throw err;
-                  let data = {
-                    id: newUser._id,
-                    username: newUser.username,
-                    balance: Number(newUser.balance),
-                    tokens:newUser.tokens
-                }
-                  res.send(data);
-              })
-          }
-          
-      })(req,res,next);
         res.send('user created');
         
     }

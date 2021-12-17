@@ -5,23 +5,23 @@ const Token = require('../schema/token')
 const User = require('../schema/user')
 /* GET users listing. */
 router.post('/add', async function(req, res) {
-    const {name, amount, userID, username} = req.body
-    const newToken = new Token({name,amount,users: [{id:userID,username, status: 'open'}], status:"open"});
+  console.log(req.user, 'my passport log')
+    const {name, amount, userID} = req.body
+    const newToken = new Token({name,amount,users: [{id:userID}], status:"open"});
     await newToken.save().then(
       await User.findByIdAndUpdate(userID, {
         $push: {
-          tokens: {id:newToken._id,name:newToken.name, }
+          tokens: {id:newToken._id }
         },
         $inc: {balance: -(newToken.amount)}
       })
     )
     res.send(newToken)
 });
-router.get('/:id/:name', (req, res) => {
+router.get('/:id', (req, res) => {
+  console.log(req.isAuthenticated(), 'my passport log')
   const id = req.params.id
-  const name = req.params.name
-  const data ={id:id, username:name}
-  Token.find({users: data}, (err, doc)=> {
+  Token.find({users: id}, (err, doc)=> {
     console.log(doc)
     res.send(doc)
   })

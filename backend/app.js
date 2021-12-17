@@ -25,11 +25,6 @@ mongoose.connect('mongodb://localhost/test?retryWrites=true&w=majority',
     }
 )
 
-// passport config
-app.use(passport.initialize());
-app.use(passport.session());
-require('./passportConfig')(passport);
-
 // Middleware
 app.use(bodyParse.json());
 app.use(bodyParse.urlencoded({extended: true}));

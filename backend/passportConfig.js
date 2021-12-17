@@ -25,6 +25,7 @@ passport.serializeUser((user,cb) => {
     cb(null, user.id)
 });
 passport.deserializeUser((id, cb) => {
+    console.log('passport ranning **************')
     User.findOne({_id: id}, (err, user)=> {
         cb(err, user)
     })

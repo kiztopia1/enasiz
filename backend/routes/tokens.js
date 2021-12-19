@@ -32,40 +32,40 @@ router.post('/connect', async(req, res) => {
   let token = null
   let user = null
   
-
-await Token.findOne({_id: tokenID.trim()},(err, doc) => {
-  token = doc
-  const demoUser = {
-    'id':userID,
-    'username': username
-  }
-  const array = doc.users.filter(user => user.id == demoUser.id)
-
-  if (array[0]){
-    res.send({error:'already connected'})
-  }else{
-    
-    User.findById(userID,(err, doc) => user = doc).then(async () => {
-    
-        await Token.findByIdAndUpdate(tokenID, {
-        $push: {
-          users: {id:userID,username:user.username, status: 'open'}
-        }
-      })
-        await User.findByIdAndUpdate(userID, {
-        $push: {
-          tokens: {id:tokenID,name:token.name}
-        },
-        $inc: {balance: -(token.amount)}
-      }).then( async() => {
-        await Token.findOne({_id:tokenID}, (err,doc) => {
-          res.send(doc)
-        })
-      })
+  await Token.findOne({_id: tokenID.trim()},(err, doc) => {
+    token = doc
+    const demoUser = {
+      'id':userID,
+      'username': username
     }
-    )
-  }
-})
+    const array = doc.users.filter(user => user.id == demoUser.id)
+
+    if (array[0]){
+      res.send({error:'already connected'})
+    }else{
+      
+      User.findById(userID,(err, doc) => user = doc).then(async () => {
+      
+          await Token.findByIdAndUpdate(tokenID, {
+          $push: {
+            users: {id:userID},
+            setStatus: false
+          }
+        })
+          await User.findByIdAndUpdate(userID, {
+          $push: {
+            tokens: {id:tokenID,name:token.name}
+          },
+          $inc: {balance: -(token.amount)}
+        }).then( async() => {
+          await Token.findOne({_id:tokenID}, (err,doc) => {
+            res.send(doc)
+          })
+        })
+      }
+      )
+    }
+  })
 
 router.post('/activate/', (req, res) => {
   const {tokenID, userID}  = req.body

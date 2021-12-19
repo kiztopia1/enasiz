@@ -7,7 +7,7 @@ const User = require('../schema/user')
 router.post('/add', async function(req, res) {
   console.log(req.user, 'my passport log')
     const {name, amount, userID} = req.body
-    const newToken = new Token({name,amount,users: [{id:userID}],setStatus: [false] , status:"open"});
+    const newToken = new Token({name,amount,users: [{id:userID}],setStatus: [false] , active:false});
     await newToken.save().then(
       await User.findByIdAndUpdate(userID, {
         $push: {

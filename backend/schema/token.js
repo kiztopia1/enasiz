@@ -4,6 +4,6 @@ const tokenSchema = new mongoose.Schema({
     amount:Number,
     users: Array,
     setStatus: Array,
-    status: String
+    active: Boolean
 });
 module.exports = mongoose.model('Token', tokenSchema);

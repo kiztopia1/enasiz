@@ -20,13 +20,13 @@ function Nav () {
         <nav>
 
                 <Link to='/' ><img src="imgs/logo.svg" alt="" className="logo" /></Link>
-                <span>{user? user.balance: 'aha'}</span>
+                <span>{user? user.balance + ' birrrr': 'aha'}</span>
                 {user? user.username: 'login'}
                 <span className='white menu' onClick={menuHandler}>menu</span>
                 <div className={`slide  ${style}`}>
                     <img src="imgs/cross.svg" alt="X" className='cross' onClick={menuHandler}/>
                     <ul>
-                        <Link to='/login'>Login</Link>
+                        <Link to='/login'>login</Link>
                         <Link to='/'>My Account</Link>
                         <Link to='/'>Dashboard</Link>
                         <Link to='/'>generate token</Link>
